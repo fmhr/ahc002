@@ -49,6 +49,7 @@ var cpuprofile = flag.String("cpuprofile", "", "write cpu profile to `file`")
 var memprofile = flag.String("memprofile", "", "write memory profile to `file`")
 
 func main() {
+	fmt.Println("nyann")
 	flag.Parse()
 	if *cpuprofile != "" {
 		f, err := os.Create(*cpuprofile)
@@ -228,7 +229,7 @@ func beamsearch(start Point) {
 		fmt.Print(direction[bestMove[i]])
 	}
 	fmt.Println("")
-	//	log.Printf("loop=%d score=%d\n", loop, bestScore)
+	log.Printf("loop=%d score=%d\n", loop, bestScore)
 }
 
 // An Item is something we manage in a priority queue.
