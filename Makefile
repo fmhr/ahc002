@@ -3,8 +3,8 @@ build: src/main.go
 		go build
 
 
-"example:
-"	./src/solver < tools/example.in > example.out
+example:
+	./src/solver < tools/example.in > example.out
 
 vis:
 	cd tools &&\

@@ -217,13 +217,14 @@ func beamsearch(start Point) {
 		}
 	}
 
-	var s string
+	// visualize.py で使う
+	// var s string
 	for i := 0; i < stepCount; i++ {
-		fmt.Fprintln(os.Stderr, "-----BEGIN-----")
-		s += fmt.Sprint(direction[bestMove[i]])
-		fmt.Fprintln(os.Stderr, (s))
-		fmt.Fprintln(os.Stderr, "-----END-----")
-		fmt.Fprintln(os.Stderr, "index = 0: score = 0")
+		// fmt.Fprintln(os.Stderr, "-----BEGIN-----")
+		// s += fmt.Sprint(direction[bestMove[i]])
+		// fmt.Fprintln(os.Stderr, (s))
+		// fmt.Fprintln(os.Stderr, "-----END-----")
+		// fmt.Fprintln(os.Stderr, "index = 0: score = 0")
 		fmt.Print(direction[bestMove[i]])
 	}
 	fmt.Println("")
