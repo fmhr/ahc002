@@ -1,6 +1,5 @@
 build: src/main.go
-	cd src &&\
-		go build
+	go build
 
 
 example:
@@ -12,14 +11,14 @@ vis:
 
 
 buildcmd:
-	cd cmd &&\
+	cd script &&\
 		go build
 
 cmdtest:
 	make buildcmd
-	./cmd/script
+	./script/script
 
 
 pprof:
-	./src/solver -cpuprofile cpu.prof < tools/in/0000.txt
+	.solver -cpuprofile cpu.prof < tools/in/0000.txt
 	pprof -http=localhost:8080 cpu.prof
