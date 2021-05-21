@@ -42,7 +42,7 @@ func run(seed int) (int, int) {
 	exe := P + "/solver"
 	inFile := fmt.Sprintf("%s/tools/in/%s.txt", P, fmt.Sprintf("%04d", seed))
 	outFile := fmt.Sprintf("%s/out/%s.out", P, fmt.Sprintf("%04d", seed))
-	cmdStr := exe + " < " + inFile + ">" + outFile
+	cmdStr := exe + " < " + inFile + " > " + outFile
 	cmds := []string{"sh", "-c", cmdStr}
 	cmd := exec.Command(cmds[0], cmds[1:]...)
 	var stderr bytes.Buffer
