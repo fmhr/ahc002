@@ -3,11 +3,9 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"regexp"
 	"strconv"
 	"strings"
@@ -132,19 +130,4 @@ func vis(input string, output string) (score int) {
 		panic(err)
 	}
 	return score
-}
-
-func dirwalk(dir string) (paths []string, names []string) {
-	files, err := ioutil.ReadDir(dir)
-	if err != nil {
-		panic(err)
-	}
-	for _, file := range files {
-		if file.IsDir() {
-			continue
-		}
-		names = append(names, file.Name())
-		paths = append(paths, filepath.Join(dir, file.Name()))
-	}
-	return
 }
