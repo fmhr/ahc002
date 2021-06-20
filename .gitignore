@@ -1,2 +1,6 @@
 tools/*
 src/solver
+._out.txt
+example.out
+script/script
+solver
