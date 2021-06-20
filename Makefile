@@ -1,22 +1,17 @@
-build: src/main.go
+build: main.go
 	go build
 
 
 example:
-	./src/solver < tools/example.in > example.out
+	./solver < tools/in/0000.txt > example.out
 
 vis:
 	cd tools &&\
 	cargo run --release --bin vis example.in example.out
 
 
-buildcmd:
-	cd script &&\
-		go build
-
-cmdtest:
-	make buildcmd
-	./script/script
+runscript:
+	go run script/main.go
 
 
 pprof:
