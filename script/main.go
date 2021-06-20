@@ -53,11 +53,11 @@ func run(seed int) (int, int) {
 		log.Fatal(err)
 	}
 	cmd.Wait()
-	score := parseScore(stderr.String())
+	score := parseInt(stderr.String(), re_score, str_score)
 	if score == 0 {
 		log.Println(stderr.String())
 	}
-	loop := parseLoop(stderr.String())
+	loop := parseInt(stderr.String(), re_loop, str_loop)
 	return score, loop
 }
 
@@ -70,6 +70,7 @@ type Date struct {
 func parallelRun() {
 	CORE := 4
 	maxSeed := 10
+	sumScore := 0
 	var mu sync.Mutex
 	var wg sync.WaitGroup
 	sem := make(chan struct{}, CORE-1)
@@ -84,34 +85,29 @@ func parallelRun() {
 			mu.Lock()
 			datas = append(datas, d)
 			// fmt.Print(".")
-			log.Printf("seed=%d score=%d loop=%d\n", d.seed, d.score, d.loop)
+			fmt.Printf("seed=%d score=%d loop=%d\n", d.seed, d.score, d.loop)
+			sumScore += d.score
 			mu.Unlock()
 			wg.Done()
 			<-sem
 		}(seed)
 	}
+	fmt.Println("sum=", sumScore)
 }
 
-func parseScore(s string) int {
-	ms := `score=([0-9]+)`
-	re := regexp.MustCompile(ms)
-	ma := re.FindString(s)
-	score, err := strconv.Atoi(strings.Replace(ma, "score=", "", -1))
-	if err != nil {
-		log.Println(score)
-	}
-	return score
-}
+var re_score = regexp.MustCompile(`score=([0-9]+)`)
+var str_score = "score="
 
-func parseLoop(s string) int {
-	ms := `loop=([0-9]+)`
-	re := regexp.MustCompile(ms)
-	ma := re.FindString(s)
-	n, err := strconv.Atoi(strings.Replace(ma, "loop=", "", -1))
+var re_loop = regexp.MustCompile(`loop=([0-9]+)`)
+var str_loop = "loop="
+
+func parseInt(src string, re *regexp.Regexp, str string) int {
+	match := re.FindString(src)
+	num, err := strconv.Atoi(strings.Replace(match, str, "", -1))
 	if err != nil {
-		log.Println(n)
+		log.Fatal(err)
 	}
-	return n
+	return num
 }
 
 func vis(input string, output string) (score int) {
