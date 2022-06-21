@@ -35,7 +35,6 @@ func testn(n int) {
 func testRun() {
 	score, n := run(0)
 	log.Printf("score=%d loop=%d\n", score, n)
-	// vscore := vis(inputpaths[50], out)
 }
 
 func run(seed int) (int, int) {
